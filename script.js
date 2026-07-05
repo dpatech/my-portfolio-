@@ -187,7 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnText;
         
         formFeedback.classList.add('success');
-        formFeedback.textContent = `Thank you, ${name}! Your message has been sent successfully. Aditya will connect with you soon.`;
+        formFeedback.textContent = `Thank you, ${name}! Redirecting you to WhatsApp to send your message...`;
+        
+        // Construct WhatsApp Message & URL
+        const whatsappText = `Hello Aditya,\n\nMy name is *${name}*.\nEmail: ${email}\nSubject: *${subject}*\n\nMessage:\n${message}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=919958760596&text=${encodeURIComponent(whatsappText)}`;
+        
+        // Redirect to WhatsApp in a new tab
+        window.open(whatsappUrl, '_blank');
         
         // Reset form inputs
         contactForm.reset();
@@ -202,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 300);
         }, 7000);
         
-      }, 1500);
+      }, 1200);
     });
   }
 });
